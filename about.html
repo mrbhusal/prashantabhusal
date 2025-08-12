@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me - Mr. Bhusal</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="icon" href="logopb.png" type="image/png" />
+  <style>
+    body {
+      background: #f9fafb;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Navbar container (same as homepage) */
+    header {
+      background: white;
+      border-radius: 1rem;
+      box-shadow:
+        0 4px 15px rgba(66, 133, 244, 0.3),
+        0 0 12px rgba(66, 133, 244, 0.4);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 2rem auto;
+    }
+
+    /* Logo and text with photo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #111827;
+      user-select: none;
+      cursor: default;
+    }
+
+    .logo img {
+      height: 32px;
+      width: 32px;
+      border-radius: 9999px;
+      object-fit: cover;
+      box-shadow:
+        0 4px 10px rgba(66, 133, 244, 0.5);
+      transition: transform 0.3s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 6px 18px rgba(66, 133, 244, 0.7);
+    }
+
+    /* Nav links (same as homepage) */
+    nav {
+      display: flex;
+      gap: 2rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #111827;
+    }
+
+    nav a {
+      position: relative;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: white;
+      box-shadow:
+        0 0 8px #6366f1,
+        inset 0 2px 6px rgba(255,255,255,0.7);
+    }
+
+    /* Login and Sign Up Buttons (same as homepage) */
+    .btn-login,
+    .btn-signup {
+      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+      box-shadow:
+        inset 0 -3px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-login {
+      background: #4f46e5;
+      color: white;
+      border-color: #4f46e5;
+      box-shadow:
+        inset 0 -3px 6px rgba(79, 70, 229, 0.8),
+        0 4px 8px rgba(79, 70, 229, 0.5);
+    }
+
+    .btn-login:hover {
+      background: #3b36d8;
+      box-shadow:
+        inset 0 -4px 8px rgba(59, 54, 216, 0.9),
+        0 6px 12px rgba(59, 54, 216, 0.7);
+    }
+
+    .btn-signup {
+      background: white;
+      color: #ef4444; /* red-500 */
+      border-color: #ef4444;
+      box-shadow:
+        inset 0 -3px 6px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-signup:hover {
+      background: #ef4444;
+      color: white;
+      box-shadow:
+        inset 0 -4px 8px rgba(239, 68, 68, 0.9),
+        0 6px 12px rgba(239, 68, 68, 0.7);
+    }
+
+    /* About section styles */
+    #about img {
+      border-radius: 9999px;
+      box-shadow:
+        0 4px 15px rgba(66, 133, 244, 0.3),
+        0 0 12px rgba(66, 133, 244, 0.4);
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      margin: 0 auto 1.5rem;
+      transition: transform 0.5s ease;
+    }
+    #about img:hover {
+      transform: scale(1.05);
+    }
+    #about {
+      text-align: center;
+      padding: 3rem 1rem 6rem; /* extra bottom padding for buttons */
+    }
+
+    /* Education section */
+    #education {
+      background: #f3f4f6;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    #education h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4f46e5;
+      margin-bottom: 2rem;
+    }
+    #education .schools {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    #education .school-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(66, 133, 244, 0.2);
+      max-width: 300px;
+      transition: transform 0.4s ease;
+    }
+    #education .school-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(66, 133, 244, 0.4);
+    }
+    #education img {
+      width: 100%;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+    #education p {
+      font-weight: 600;
+      color: #374151;
+    }
+.action-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .action-buttons a.hire,
+    .action-buttons a.contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      font-weight: 600;
+      font-size: 1.125rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow:
+        inset 0 -3px 0 rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      user-select: none;
+      color: white;
+    }
+
+    .action-buttons a.hire {
+      background: #4f46e5; /* Indigo */
+      box-shadow:
+        inset 0 -4px 6px rgba(79, 70, 229, 0.8),
+        0 6px 12px rgba(79, 70, 229, 0.5);
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    .action-buttons a.hire:hover,
+    .action-buttons a.hire:focus-visible {
+      background: #4338ca;
+      box-shadow:
+        inset 0 -5px 10px rgba(67, 56, 202, 0.9),
+        0 8px 15px rgba(67, 56, 202, 0.7);
+      outline: none;
+      animation-play-state: paused;
+    }
+
+    .action-buttons a.contact {
+      background: #ef4444; /* Red */
+      box-shadow:
+        inset 0 -4px 6px rgba(239, 68, 68, 0.8),
+        0 6px 12px rgba(239, 68, 68, 0.5);
+      animation: glowRed 2.5s ease-in-out infinite alternate;
+    }
+
+    .action-buttons a.contact:hover,
+    .action-buttons a.contact:focus-visible {
+      background: #dc2626;
+      box-shadow:
+        inset 0 -5px 10px rgba(220, 38, 38, 0.9),
+        0 8px 15px rgba(220, 38, 38, 0.7);
+      outline: none;
+      animation-play-state: paused;
+    }
+
+    /* FontAwesome icons in buttons */
+    .action-buttons a i {
+      font-size: 1.25rem;
+    }
+
+
+    /* Location */
+    #location {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    #location h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4f46e5;
+      margin-bottom: 1rem;
+    }
+    #location iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 320px;
+      border-radius: 1rem;
+      box-shadow:
+        0 4px 15px rgba(66, 133, 244, 0.3);
+      border: none;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Projects section replaced */
+    #projects {
+      background: #f3f4f6;
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+      position: relative;
+    }
+    #projects h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4f46e5;
+      margin-bottom: 2rem;
+    }
+    #carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(66, 133, 244, 0.2);
+      background: white;
+    }
+    #carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      will-change: transform;
+      user-select: none;
+    }
+    .project-box {
+      display: flex;
+      flex: 0 0 460px;
+      margin: 0 1rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(66, 133, 244, 0.15);
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      align-items: center;
+      gap: 1.5rem;
+      outline-offset: 4px;
+    }
+    .project-box:hover,
+    .project-box:focus-visible {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 14px 35px rgba(66, 133, 244, 0.35);
+      outline: none;
+    }
+    .project-image-container {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(66, 133, 244, 0.3);
+      transition: box-shadow 0.3s ease;
+    }
+    .project-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1rem;
+      transition: transform 0.4s ease;
+    }
+    .project-image-container:hover img,
+    .project-image-container:focus-within img {
+      transform: scale(1.1);
+    }
+    .project-text {
+      text-align: left;
+      flex-grow: 1;
+    }
+    .project-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+    .project-description {
+      font-size: 1rem;
+      color: #4b5563;
+      line-height: 1.4;
+      user-select: text;
+    }
+
+    /* Carousel buttons */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(79, 70, 229, 0.8);
+      border: none;
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 10px #6366f1,
+        inset 0 0 15px #818cf8;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      z-index: 10;
+    }
+    .carousel-button:hover,
+    .carousel-button:focus-visible {
+      background: #4f46e5;
+      outline: none;
+      box-shadow:
+        0 0 20px #4f46e5,
+        inset 0 0 25px #a5b4fc;
+    }
+    #prevBtn {
+      left: 0.5rem;
+    }
+    #nextBtn {
+      right: 0.5rem;
+    }
+
+    /* Modal styles */
+    #modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      cursor: pointer;
+    }
+    #modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.7);
+      cursor: auto;
+    }
+    #modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 700;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    #modal-close:hover,
+    #modal-close:focus-visible {
+      background: rgba(79, 70, 229, 0.8);
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .project-box {
+        flex-direction: column;
+        width: 280px;
+        margin: 0 auto 2rem;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      #carousel-track {
+        justify-content: center;
+      }
+      .carousel-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" aria-label="Mr. Bhusal logo">
+      <img src="logopb.png" alt="Prashanta Bhusal" />
+      <span>Mr. Bhusal</span>
+    </div>
+    <nav role="navigation" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div>
+    <div id="auth-buttons">
+  <button class="btn-login" type="button" onclick="location.href='login.html'">Login</button>
+  <button class="btn-signup" type="button" onclick="location.href='signup.html'">Sign Up</button>
+</div>
+
+    </div>
+  </header>
+
+  <section id="about">
+    <img src="pb1.png" alt="Prashanta Bhusal" />
+    <h1 class="text-3xl font-bold mb-2">About Me</h1>
+    <p class="max-w-3xl mx-auto text-lg text-gray-700">
+      Hello! I'm Prashanta Bhusal, a passionate and innovative developer dedicated to crafting modern digital experiences. I specialize in web design, graphics, and AI-based solutions. With a love for clean code and creative visuals, I bring ideas to life with precision and flair. I'm also proud to be an active member of Hack Club Butwal, where I learn, contribute, and grow within a vibrant tech community.
+    </p>
+
+    <!-- Buttons -->
+    <div class="action-buttons">
+      <a href="hireme.html" class="hire" aria-label="Hire Me">Hire Me <i class="fas fa-briefcase"></i></a>
+      <a href="https://wa.me/9779766654639" target="_blank" rel="noopener noreferrer" class="contact" aria-label="Contact Me via WhatsApp">Contact Me <i class="fab fa-whatsapp"></i></a>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="schools">
+      <div class="school-card">
+        <img src="hpb2.jpg" alt="Hansapur Public English Boarding School" />
+        <p>Nursery to Grade 8<br />Hansapur Public English Boarding School</p>
+      </div>
+      <div class="school-card">
+        <img src="kalikaschool.jpg" alt="Kalika Manavgyan Secondary School" />
+        <p>Currently Grade 9-10 Computer Engineering<br />Kalika Manavgyan Secondary School</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <h2>My Address</h2>
+    <p>Malarani Rural Municipality, Ward No. 7, Arghakhanchi</p>
+    <iframe
+      src="https://maps.google.com/maps?q=Malarani%20Rural%20Municipality%20ward%20no%207%20arghakhanchi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </section>
+
+  <!-- REPLACED PROJECTS SECTION START -->
+  <section id="projects" aria-label="My Projects">
+    <h2>My Projects</h2>
+    <div id="carousel-container" aria-live="polite">
+      <button class="carousel-button" id="prevBtn" aria-label="Previous project">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div id="carousel-track" tabindex="0">
+        <article class="project-box" tabindex="0" aria-describedby="desc-logos">
+          <div class="project-image-container">
+            <img src="logo3.png" alt="Logo Design Project" tabindex="0" />
+          </div>
+          <div class="project-text">
+            <h3 class="project-title">Logos</h3>
+            <p id="desc-logos" class="project-description">
+              Creative logo designs tailored to brand identity, combining modern aesthetics and meaningful symbolism to elevate your business presence.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-box" tabindex="0" aria-describedby="desc-banners">
+          <div class="project-image-container">
+            <img src="banner2.png" alt="Banner Design Project" tabindex="0" />
+          </div>
+          <div class="project-text">
+            <h3 class="project-title">Banners</h3>
+            <p id="desc-banners" class="project-description">
+              Eye-catching banner designs for digital and print media, optimized for high impact and clear messaging across all platforms.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-box" tabindex="0" aria-describedby="desc-flyers">
+          <div class="project-image-container">
+            <img src="flyer1.png" alt="Flyer Design Project" tabindex="0" />
+          </div>
+          <div class="project-text">
+            <h3 class="project-title">Flyers</h3>
+            <p id="desc-flyers" class="project-description">
+              Professional flyer designs that effectively communicate your offers and events, designed to capture attention and drive engagement.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-box" tabindex="0" aria-describedby="desc-visiting-cards">
+          <div class="project-image-container">
+            <img src="vcard1.png" alt="Visiting Card Design Project" tabindex="0" />
+          </div>
+          <div class="project-text">
+            <h3 class="project-title">Visiting Cards</h3>
+            <p id="desc-visiting-cards" class="project-description">
+              Stylish and professional visiting card designs that make a lasting impression, customized for personal and business branding.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-box" tabindex="0" aria-describedby="desc-certificate">
+          <div class="project-image-container">
+            <img src="cert2.png" alt="Certificate Design Project" tabindex="0" />
+          </div>
+          <div class="project-text">
+            <h3 class="project-title">Certificate</h3>
+            <p id="desc-certificate" class="project-description">
+              Elegant and formal certificate designs that recognize achievement and professionalism with a polished look.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <button class="carousel-button" id="nextBtn" aria-label="Next project">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Modal for full screen image preview -->
+    <div id="modal" role="dialog" aria-modal="true" aria-label="Project image preview">
+      <span id="modal-close" role="button" tabindex="0" aria-label="Close preview">&times;</span>
+      <img src="" alt="Full size project preview" />
+    </div>
+  </section>
+  <!-- REPLACED PROJECTS SECTION END -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const authButtonsDiv = document.getElementById('auth-buttons');
+    const loggedIn = localStorage.getItem('loggedIn');
+    const avatarUrl = localStorage.getItem('avatarUrl');
+
+    if (loggedIn === 'true' && avatarUrl && authButtonsDiv) {
+      authButtonsDiv.innerHTML = `
+        <div class="avatar-container" tabindex="0" aria-label="User menu" role="button" aria-haspopup="true" aria-expanded="false" style="position: relative; display: inline-block; cursor: pointer;">
+          <img src="${avatarUrl}" alt="User Avatar" style="width:40px; height:40px; border-radius:9999px; object-fit: cover;" />
+          <div class="avatar-dropdown" role="menu" style="position: absolute; right: 0; top: 110%; background: white; border-radius: 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); padding: 0.5rem 0; min-width: 120px; display: none; z-index: 1000;">
+            <button id="logout-btn" role="menuitem" style="background:none; border:none; width:100%; text-align:left; padding:0.5rem 1rem; font-weight:600; color:#4f46e5; cursor:pointer;">Logout</button>
+          </div>
+        </div>
+      `;
+
+      const avatarContainer = authButtonsDiv.querySelector('.avatar-container');
+      const dropdown = authButtonsDiv.querySelector('.avatar-dropdown');
+      const logoutBtn = document.getElementById('logout-btn');
+
+      avatarContainer.addEventListener('click', () => {
+        const isShown = dropdown.style.display === 'block';
+        dropdown.style.display = isShown ? 'none' : 'block';
+        avatarContainer.setAttribute('aria-expanded', !isShown);
+      });
+      avatarContainer.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isShown = dropdown.style.display === 'block';
+          dropdown.style.display = isShown ? 'none' : 'block';
+          avatarContainer.setAttribute('aria-expanded', !isShown);
+        }
+      });
+
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('avatarUrl');
+        localStorage.removeItem('userEmail');
+        location.reload();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!authButtonsDiv.contains(e.target)) {
+          dropdown.style.display = 'none';
+          avatarContainer.setAttribute('aria-expanded', false);
+        }
+      });
+    }
+  });
+</script>
+
+  <script>
+    (function() {
+      const track = document.getElementById('carousel-track');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const projects = track.children;
+      const total = projects.length;
+      let currentIndex = 0;
+
+      // Width of each project box including margin (approx)
+      function getBoxWidth() {
+        const style = getComputedStyle(projects[0]);
+        const marginRight = parseInt(style.marginRight);
+        return projects[0].offsetWidth + marginRight;
+      }
+
+      function updateCarousel() {
+        const width = getBoxWidth();
+        track.style.transform = `translateX(${-width * currentIndex}px)`;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? total - 1 : currentIndex - 1;
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === total - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+      });
+
+      // Keyboard accessibility for buttons
+      prevBtn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          prevBtn.click();
+        }
+      });
+      nextBtn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          nextBtn.click();
+        }
+      });
+
+      // Modal image preview
+      const modal = document.getElementById('modal');
+      const modalImg = modal.querySelector('img');
+      const modalClose = document.getElementById('modal-close');
+
+      // Open modal when clicking project images
+      track.querySelectorAll('.project-image-container img').forEach(img => {
+        img.addEventListener('click', () => {
+          modal.style.display = 'flex';
+          modalImg.src = img.src;
+          modalImg.alt = img.alt;
+          modalClose.focus();
+        });
+        // also keyboard accessible
+        img.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            img.click();
+          }
+        });
+      });
+
+      // Close modal function
+      function closeModal() {
+        modal.style.display = 'none';
+        modalImg.src = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modalClose.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          closeModal();
+        }
+      });
+
+      // Close modal when clicking outside image
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+          closeModal();
+        }
+      });
+
+      // Initialize carousel position
+      updateCarousel();
+
+      // Responsive adjustment on window resize
+      window.addEventListener('resize', () => {
+        updateCarousel();
+      });
+    })();
+  </script>
+</body>
+</html>

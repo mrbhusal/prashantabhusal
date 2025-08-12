@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mr. Bhusal - Login</title>
+  <link rel="icon" href="logopb.png" type="image/png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body, html {
+      margin: 0; padding: 0; height: 100vh;
+      background: #e4e9f7;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .container {
+      width: 700px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      display: flex;
+      overflow: hidden;
+    }
+    .form-container {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid #ddd;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #6c63ff;
+    }
+    button {
+      background-color: #6c63ff;
+      border: none;
+      color: white;
+      padding: 12px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #5548c8;
+    }
+    .sign-up-side {
+      flex: 1;
+      background: linear-gradient(135deg, #5e54a4, #6c63ff);
+      color: white;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .sign-up-side h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    .sign-up-side p {
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .sign-up-side button {
+      border: 2px solid white;
+      background: transparent;
+      padding: 12px 40px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .sign-up-side button:hover {
+      background-color: white;
+      color: #6c63ff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container">
+    <form id="login-form">
+      <h1>Sign In</h1>
+      <span>Use your email and password</span>
+      <input type="email" id="email" name="email" placeholder="Enter E-mail" required />
+      <input type="password" id="password" name="password" placeholder="Enter Password" required />
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+  <div class="sign-up-side">
+    <h2>Hello, Friend!</h2>
+    <p>Register with your personal details to use all of site features</p>
+    <button id="go-signup">Sign Up</button>
+  </div>
+</div>
+
+<script>
+  // Redirect to signup page
+  document.getElementById('go-signup').addEventListener('click', () => {
+    window.location.href = 'signup.html';
+  });
+
+  // Login validation
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
+
+    // Get users object from localStorage (assumed to be in this shape)
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    if(users[email] && users[email].password === password) {
+      // If user has an avatar URL saved during signup, use it. Else fallback avatar
+      const avatarUrl = users[email].avatarUrl || 'https://i.pravatar.cc/40?u=' + encodeURIComponent(email);
+localStorage.setItem('loggedIn', 'true');
+localStorage.setItem('avatarUrl', users[email].avatarUrl);
+localStorage.setItem('userEmail', email);
+      // Save login status and avatar to localStorage for mainpage to read
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('avatarUrl', avatarUrl);
+      localStorage.setItem('userEmail', email);
+
+      alert("Login successful!");
+      window.location.href = "index.html"; // Redirect to homepage
+    } else {
+      alert("Invalid email or password");
+    }
+    localStorage.setItem('loggedIn', 'true');
+localStorage.setItem('avatarUrl', YOUR_UPLOADED_AVATAR_URL_OR_BASE64);
+localStorage.setItem('userEmail', USER_EMAIL);
+
+  });
+</script>
+
+</body>
+</html>

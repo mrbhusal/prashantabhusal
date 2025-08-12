@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mr. Bhusal - Sign Up</title>
+  <link rel="icon" href="logopb.png" type="image/png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #e4e9f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      overflow: hidden;
+      max-width: 900px;
+      width: 100%;
+      height: 600px;
+    }
+    .form-container {
+      flex: 1 1 400px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+       height: 500px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #6c63ff;
+    }
+    button {
+      background-color: #6c63ff;
+      border: none;
+      color: white;
+      padding: 12px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #5548c8;
+    }
+    .sign-in-side {
+      flex: 1 1 400px;
+      background: linear-gradient(135deg, #5e54a4, #6c63ff);
+      color: white;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .sign-in-side h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    .sign-in-side p {
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .sign-in-side button {
+      border: 2px solid white;
+      background: transparent;
+      padding: 12px 40px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .sign-in-side button:hover {
+      background-color: white;
+      color: #6c63ff;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body, html {
+        height: auto;
+        padding: 20px 0;
+      }
+      .container {
+        flex-direction: column;
+        border-radius: 15px;
+      }
+      .sign-in-side {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container sign-up">
+    <form id="signup-form">
+      <h1>Create Account</h1>
+      <input type="text" id="name" name="name" placeholder="Full Name" required />
+      <input type="email" id="email" name="email" placeholder="Email Address" required />
+      <input type="password" id="password" name="password" placeholder="Password" required />
+      <label>Upload Logo/Avatar:</label>
+      <input type="file" id="logo" name="logo" accept="image/*" required />
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  <div class="sign-in-side">
+    <h2>Welcome Back!</h2>
+    <p>If you already have an account, just sign in.</p>
+    <button id="go-login">Sign In</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('go-login').addEventListener('click', () => {
+    window.location.href = 'login.html';
+  });
+
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
+    const logoFile = document.getElementById('logo').files[0];
+
+    if (!logoFile) {
+      alert('Please upload a logo.');
+      return;
+    }
+
+    // First check if user exists to avoid async race
+    let users = JSON.parse(localStorage.getItem('users') || '{}');
+    if (users[email]) {
+      alert('User with this email already exists. Please login.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const logoBase64 = event.target.result;
+
+      // Save user data with consistent avatarUrl key
+      users[email] = { name, password, avatarUrl: logoBase64 };
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert(`Account created for ${name}! Please login.`);
+      window.location.href = 'login.html';
+    };
+    reader.readAsDataURL(logoFile);
+  });
+</script>
+
+</body>
+</html>
